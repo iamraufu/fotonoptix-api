@@ -3,6 +3,8 @@ const app = express();
 var cors = require('cors');
 const { connectDB } = require('./database/connection');
 const UserRoutes = require('./routes/UserRoutes')
+const CategoryRoutes = require('./routes/CategoryRoutes')
+const SubcategoryRoutes = require('./routes/SubcategoryRoutes')
 
 require('dotenv').config()
 
@@ -23,6 +25,8 @@ app.get('/health', (req, res) => {
 })
 
 app.use("/api/user", UserRoutes) // User API
+app.use("/api/category", CategoryRoutes) // Category API
+app.use("/api/subcategory", SubcategoryRoutes) // Sub Category API
 
 connectDB()
 
