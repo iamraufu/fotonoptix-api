@@ -5,6 +5,7 @@ const { connectDB } = require('./database/connection');
 const UserRoutes = require('./routes/UserRoutes')
 const CategoryRoutes = require('./routes/CategoryRoutes')
 const SubcategoryRoutes = require('./routes/SubcategoryRoutes')
+const ApplicationRoutes = require('./routes/ApplicationRoutes')
 
 require('dotenv').config()
 
@@ -26,7 +27,8 @@ app.get('/health', (req, res) => {
 
 app.use("/api/user", UserRoutes) // User API
 app.use("/api/category", CategoryRoutes) // Category API
-app.use("/api/subcategory", SubcategoryRoutes) // Sub Category API
+app.use("/api/subcategory", SubcategoryRoutes) // Subcategory API
+app.use("/api/application", ApplicationRoutes) // Application API
 
 connectDB()
 
