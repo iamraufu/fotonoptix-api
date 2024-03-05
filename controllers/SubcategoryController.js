@@ -90,14 +90,15 @@ const subcategory = async (req, res) => {
             }
 
             let foundSubcategory = await SubcategoryModel.findById(id).lean()
-            const categoryDetails = await CategoryModel.findById(foundSubcategory.categoryId).select(' -_id name banner');
-
+            
             if (!foundSubcategory) {
                   return res.status(404).json({
                         status: false,
                         message: `Subcategory not found`,
                   });
             }
+            
+            const categoryDetails = await CategoryModel.findById(foundSubcategory.categoryId).select(' -_id name banner');
 
             foundSubcategory = {
                   ...foundSubcategory,

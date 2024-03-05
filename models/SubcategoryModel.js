@@ -5,6 +5,7 @@ const subcategorySchema = new mongoose.Schema({
             type: String,
             trim: true,
             immutable: true,
+            unique: true,
             required: true
       },
       categoryId: {
