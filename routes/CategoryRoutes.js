@@ -11,7 +11,7 @@ const {
 } = require('../controllers/CategoryController')
 
 router.post('/', tokenVerify, create) // Create a Category
-router.get('/', tokenVerify, categories) // Get all categories
+router.get('/', categories) // Get all categories
 router.get('/:id', tokenVerify, category) // Get single category
 router.patch('/:id', tokenVerify, update) // Update single category
 

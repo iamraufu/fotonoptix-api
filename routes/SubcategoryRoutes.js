@@ -11,7 +11,7 @@ const {
 } = require('../controllers/SubcategoryController')
 
 router.post('/', tokenVerify, create) // Create a Sub Category
-router.get('/', tokenVerify, subcategories) // Get all categories
+router.get('/', subcategories) // Get all categories
 router.get('/:id', tokenVerify, subcategory) // Get single Sub Category
 router.patch('/:id', tokenVerify, update) // Update single Sub Category
 
