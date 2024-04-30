@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const register = async (req, res) => {
       try {
             const { email } = req.body
-            const userExist = Boolean(await UserModel.findOne({ email }))
+            const userExist = Boolean(await UserModel.findOne({ email: email.trim() }))
 
             if (!userExist) {
                   const salt = await bcrypt.genSalt(10);
@@ -28,7 +28,8 @@ const register = async (req, res) => {
                                     name: user.name,
                                     email: user.email,
                                     role: user.role,
-                              }, process.env.JWT)
+                              }, process.env.JWT),
+                              user
                         })
             }
             else {
@@ -50,8 +51,8 @@ const register = async (req, res) => {
 const login = async (req, res) => {
       try {
             const { email, password } = req.body
-            const user = await UserModel.findOne({ email })
-            const userWithoutPassword = await UserModel.findOne({ email }).select(" -password")
+            const user = await UserModel.findOne({ email: email.trim() })
+            const userWithoutPassword = await UserModel.findOne({ email: email.trim() }).select(" -password")
             const userExist = Boolean(user)
 
             if (!userExist) {
@@ -99,7 +100,7 @@ const login = async (req, res) => {
 // GET all users
 const users = async (req, res) => {
       try {
-            await search(req, res, '')
+            await search(req, res)
       }
       catch (err) {
             res.status(500).json({
@@ -170,7 +171,7 @@ const update = async (req, res) => {
                   });
             }
 
-            if(!password && newPassword){
+            if (!password && newPassword) {
                   return res.status(401).json({
                         status: false,
                         message: "Please enter old password"
@@ -235,25 +236,19 @@ const update = async (req, res) => {
       }
 }
 
-const search = async (req, res, status) => {
+const search = async (req, res) => {
 
       let filter = {
-            isDeleted: false,
-            status
+            isDeleted: false
       };
 
-      if (status === '') {
-            filter = {
-                  isDeleted: false
-            };
-      }
       if (req.query.filterBy && req.query.value) {
             filter[req.query.filterBy] = req.query.value;
       }
 
       const pageSize = +req.query.pageSize || 10;
       const currentPage = +req.query.currentPage || 1;
-      const sortBy = req.query.sortBy || '_id'; // _id or description or code or po or etc.
+      const sortBy = req.query.sortBy || '_id';
       const sortOrder = req.query.sortOrder || 'desc'; // asc or desc
 
       const totalItems = await UserModel.find(filter).countDocuments();
