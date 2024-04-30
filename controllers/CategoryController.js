@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const create = async (req, res) => {
       try {
             const { name } = req.body
-            const categoryExist = Boolean(await CategoryModel.findOne({ name }))
+            const categoryExist = Boolean(await CategoryModel.findOne({ name: name.trim() }))
 
             if (!categoryExist) {
                   const category = await CategoryModel.create(req.body)
@@ -20,7 +20,7 @@ const create = async (req, res) => {
             else {
                   return res.status(409).send({
                         status: false,
-                        message: `Category exist with ${name}`
+                        message: `Category exist with ${name.trim()}`
                   })
             }
 
@@ -36,7 +36,7 @@ const create = async (req, res) => {
 // GET all categories
 const categories = async (req, res) => {
       try {
-            await search(req, res, '')
+            await search(req, res)
       }
       catch (err) {
             res.status(500).json({
@@ -81,25 +81,19 @@ const category = async (req, res) => {
       }
 }
 
-const search = async (req, res, status) => {
+const search = async (req, res) => {
 
       let filter = {
-            isDeleted: false,
-            status
+            isDeleted: false
       };
 
-      if (status === '') {
-            filter = {
-                  isDeleted: false
-            };
-      }
       if (req.query.filterBy && req.query.value) {
             filter[req.query.filterBy] = req.query.value;
       }
 
       const pageSize = +req.query.pageSize || 10;
       const currentPage = +req.query.currentPage || 1;
-      const sortBy = req.query.sortBy || '_id'; // _id or description or code or po or etc.
+      const sortBy = req.query.sortBy || '_id';
       const sortOrder = req.query.sortOrder || 'desc'; // asc or desc
 
       const totalItems = await CategoryModel.find(filter).countDocuments();

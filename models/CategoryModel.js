@@ -10,7 +10,8 @@ const categorySchema = new mongoose.Schema({
       },
       banner: {
             type: String,
-            default: ""
+            default: "",
+            required: true
       },
       isDeleted: {
             type: Boolean,
