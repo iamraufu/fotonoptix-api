@@ -66,7 +66,7 @@ const create = async (req, res) => {
 // GET all subcategories
 const subcategories = async (req, res) => {
       try {
-            await search(req, res, '')
+            await search(req, res)
       }
       catch (err) {
             res.status(500).json({
@@ -118,25 +118,19 @@ const subcategory = async (req, res) => {
       }
 }
 
-const search = async (req, res, status) => {
+const search = async (req, res) => {
 
       let filter = {
-            isDeleted: false,
-            status
+            isDeleted: false
       };
 
-      if (status === '') {
-            filter = {
-                  isDeleted: false
-            };
-      }
       if (req.query.filterBy && req.query.value) {
             filter[req.query.filterBy] = req.query.value;
       }
 
       const pageSize = +req.query.pageSize || 10;
       const currentPage = +req.query.currentPage || 1;
-      const sortBy = req.query.sortBy || '_id'; // _id or description or code or po or etc.
+      const sortBy = req.query.sortBy || '_id';
       const sortOrder = req.query.sortOrder || 'desc'; // asc or desc
 
       const totalItems = await SubcategoryModel.find(filter).countDocuments();
