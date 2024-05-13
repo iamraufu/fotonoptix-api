@@ -6,6 +6,7 @@ const UserRoutes = require('./routes/UserRoutes')
 const CategoryRoutes = require('./routes/CategoryRoutes')
 const SubcategoryRoutes = require('./routes/SubcategoryRoutes')
 const ApplicationRoutes = require('./routes/ApplicationRoutes')
+const ProductRoutes = require('./routes/ProductRoutes')
 
 require('dotenv').config()
 
@@ -29,6 +30,7 @@ app.use("/api/user", UserRoutes) // User API
 app.use("/api/category", CategoryRoutes) // Category API
 app.use("/api/subcategory", SubcategoryRoutes) // Subcategory API
 app.use("/api/application", ApplicationRoutes) // Application API
+app.use("/api/product", ProductRoutes) // Product API
 
 connectDB()
 
