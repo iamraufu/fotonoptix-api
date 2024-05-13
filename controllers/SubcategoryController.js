@@ -5,9 +5,9 @@ const mongoose = require("mongoose");
 // Create a sub category
 const create = async (req, res) => {
       try {
-            const { name, categoryId } = req.body
+            const { name, category } = req.body
             const subCategoryExist = Boolean(await SubcategoryModel.findOne({ name }))
-            const categoryExist = Boolean(await CategoryModel.findById(categoryId))
+            const categoryExist = Boolean(await CategoryModel.findById(category))
 
             if (subCategoryExist) {
                   return res.status(409).send({
@@ -23,14 +23,14 @@ const create = async (req, res) => {
                   })
             }
 
-            if (!categoryId) {
+            if (!category) {
                   return res.status(404).json({
                         status: false,
                         message: `Category Id Missing`
                   })
             }
 
-            if (!mongoose.Types.ObjectId.isValid(categoryId)) {
+            if (!mongoose.Types.ObjectId.isValid(category)) {
                   return res.status(404).json({
                         status: false,
                         message: `Category Id Incorrect`
@@ -40,7 +40,7 @@ const create = async (req, res) => {
             if (!categoryExist) {
                   return res.status(404).send({
                         status: false,
-                        message: `Category doesn't exist with ${categoryId}`
+                        message: `Category doesn't exist with ${category}`
                   })
             }
 
@@ -89,20 +89,18 @@ const subcategory = async (req, res) => {
                   })
             }
 
-            let foundSubcategory = await SubcategoryModel.findById(id).lean()
+            const foundSubcategory = await SubcategoryModel.findById(id).lean().populate(
+                  {
+                        path: 'category',
+                        select: " -_id name banner"
+                  }
+            )
             
             if (!foundSubcategory) {
                   return res.status(404).json({
                         status: false,
                         message: `Subcategory not found`,
                   });
-            }
-            
-            const categoryDetails = await CategoryModel.findById(foundSubcategory.categoryId).select(' -_id name banner');
-
-            foundSubcategory = {
-                  ...foundSubcategory,
-                  category: categoryDetails
             }
 
             res.status(200).json({
@@ -139,17 +137,12 @@ const search = async (req, res) => {
             .limit(pageSize)
             .sort({ [sortBy]: sortOrder })
             .lean()
-
-      for (let i = 0; i < items.length; i++) {
-            const subcategory = items[i];
-            const category = await CategoryModel.findById(subcategory.categoryId).select(' -_id name banner').lean();
-            if (category) {
-                  items[i] = {
-                        ...subcategory,
-                        category
+            .populate(
+                  {
+                        path: 'category',
+                        select: " -_id name banner"
                   }
-            }
-      }
+            )
 
       const responseObject = {
             status: true,
@@ -210,6 +203,11 @@ const update = async (req, res) => {
                         {
                               new: true,
                               runValidators: true
+                        }
+                  ).populate(
+                        {
+                              path: 'category',
+                              select: " -_id name banner"
                         }
                   )
 
