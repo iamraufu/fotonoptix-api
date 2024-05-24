@@ -92,6 +92,12 @@ const productSchema = new mongoose.Schema({
                               // required: true,
                               // default: ""
                         },
+                        angleDivergence:{
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
                         powerInstability: {
                               type: String,
                               trim: true,
