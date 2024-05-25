@@ -92,7 +92,7 @@ const productSchema = new mongoose.Schema({
                               // required: true,
                               // default: ""
                         },
-                        angleDivergence:{
+                        angleDivergence: {
                               type: String,
                               trim: true,
                               // required: true,
@@ -225,6 +225,12 @@ const productSchema = new mongoose.Schema({
                               // default: ""
                         },
                         outerDiameter: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
+                        coolingCapacity: {
                               type: String,
                               trim: true,
                               // required: true,
