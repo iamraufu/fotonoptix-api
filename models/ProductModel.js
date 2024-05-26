@@ -68,6 +68,18 @@ const productSchema = new mongoose.Schema({
                               // required: true,
                               // default: ""
                         },
+                        centralBeamOutputPower: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
+                        ringBeamOutputPower:{
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
                         operatingMode: {
                               type: String,
                               trim: true,
