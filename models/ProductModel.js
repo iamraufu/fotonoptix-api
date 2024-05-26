@@ -86,6 +86,42 @@ const productSchema = new mongoose.Schema({
                               // required: true,
                               // default: ""
                         },
+                        maxPower: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
+                        maxAveragePower: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
+                        maxPeakPower: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
+                        maxPulseEnergy: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
+                        pulseWidth: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
+                        peakPowerRange: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
                         beamQuality: {
                               type: String,
                               trim: true,
