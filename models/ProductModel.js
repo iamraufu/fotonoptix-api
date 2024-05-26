@@ -236,6 +236,12 @@ const productSchema = new mongoose.Schema({
                               // required: true,
                               // default: ""
                         },
+                        waveformEditing: {
+                              type: String,
+                              trim: true,
+                              // required: true,
+                              // default: ""
+                        },
                         coolingMethod: {
                               type: String,
                               trim: true,
