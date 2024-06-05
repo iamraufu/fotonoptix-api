@@ -49,6 +49,7 @@ const create = async (req, res) => {
 
             if (!productExist) {
                   const product = await ProductModel.create(req.body)
+                  console.log(product);
 
                   return res.status(201).send({
                         status: true,
@@ -58,6 +59,7 @@ const create = async (req, res) => {
             }
       }
       catch (err) {
+            console.log(err);
             res.send({
                   status: false,
                   message: `${err}`

@@ -58,8 +58,8 @@ const productSchema = new mongoose.Schema({
                   {
                         model: {
                               type: String,
-                              unique: true,
                               trim: true,
+                              unique: true,
                               // required: true
                         },
                         outputPower: {
@@ -74,7 +74,7 @@ const productSchema = new mongoose.Schema({
                               // required: true,
                               // default: ""
                         },
-                        ringBeamOutputPower:{
+                        ringBeamOutputPower: {
                               type: String,
                               trim: true,
                               // required: true,
@@ -303,8 +303,176 @@ const productSchema = new mongoose.Schema({
                               // default: ""
                         }
                   }
-            ],
-            required: true,
+            ]
+      },
+      specifications2: {
+            type: [
+                  {
+                        fiberSize: {
+                              type: String,
+                              trim: true,
+                        },
+                        na: {
+                              type: String,
+                              trim: true,
+                        },
+                        fiberCharacteristics: {
+                              type: String,
+                              trim: true,
+                        },
+                        connectorType: {
+                              type: String,
+                              trim: true,
+                        },
+                        cores: {
+                              type: String,
+                              trim: true,
+                        },
+                        length: {
+                              type: String,
+                              trim: true,
+                        },
+                        wavelength: {
+                              type: String,
+                              trim: true,
+                        },
+                        power: {
+                              type: String,
+                              trim: true,
+                        },
+                        efficiency: {
+                              type: String,
+                              trim: true,
+                        },
+                        powerStability: {
+                              type: String,
+                              trim: true,
+                        },
+                        powerConsistency: {
+                              type: String,
+                              trim: true,
+                        },
+                        cleanliness: {
+                              type: String,
+                              trim: true,
+                        },
+                        collimation: {
+                              type: String,
+                              trim: true,
+                        },
+                        force: {
+                              type: String,
+                              trim: true,
+                        },
+                        tensile: {
+                              type: String,
+                              trim: true,
+                        },
+                        threshold: {
+                              type: String,
+                              trim: true,
+                        },
+                        flameGrade: {
+                              type: String,
+                              trim: true,
+                        },
+                        remark: {
+                              type: String,
+                              trim: true,
+                        }
+                  }
+            ]
+      },
+      specifications3: {
+            type: [
+                  {
+                        index: {
+                              type: String,
+                              unique:true,
+                              trim: true,
+                        },
+                        model: {
+                              type: String,
+                              trim: true,
+                        },
+                        productType: {
+                              type: String,
+                              trim: true,
+                        },
+                        gratingType: {
+                              type: String,
+                              trim: true,
+                        },
+                        centralWavelength: {
+                              type: String,
+                              trim: true,
+                        },
+                        reflectivity: {
+                              type: String,
+                              trim: true,
+                        },
+                        bandwidth: {
+                              type: String,
+                              trim: true,
+                        },
+                        wavelengthMismatch: {
+                              type: String,
+                              trim: true,
+                        },
+                        suppressionRatio: {
+                              type: String,
+                              trim: true,
+                        },
+                        fiberType: {
+                              type: String,
+                              trim: true,
+                        },
+                        tolerance: {
+                              type: String,
+                              trim: true,
+                        },
+                        structure: {
+                              type: String,
+                              trim: true,
+                        },
+                        length: {
+                              type: String,
+                              trim: true,
+                        },
+                        coreLayer: {
+                              type: String,
+                              trim: true,
+                        },
+                        cladding1: {
+                              type: String,
+                              trim: true,
+                        },
+                        cladding2: {
+                              type: String,
+                              trim: true,
+                        },
+                        cladding3: {
+                              type: String,
+                              trim: true,
+                        },
+                        cladding4: {
+                              type: String,
+                              trim: true,
+                        },
+                        innerCoating: {
+                              type: String,
+                              trim: true,
+                        },
+                        outerCoating: {
+                              type: String,
+                              trim: true,
+                        },
+                        tension: {
+                              type: String,
+                              trim: true,
+                        }
+                  }
+            ]
       }
 })
 
