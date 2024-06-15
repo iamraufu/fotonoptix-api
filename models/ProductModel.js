@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
       name: {
             type: String,
-            unique: true,
+            // unique: true,
             trim: true,
             required: true
       },
@@ -59,7 +59,7 @@ const productSchema = new mongoose.Schema({
                         model: {
                               type: String,
                               trim: true,
-                              unique: true,
+                              // unique: true,
                               // required: true
                         },
                         outputPower: {
@@ -388,7 +388,7 @@ const productSchema = new mongoose.Schema({
                   {
                         index: {
                               type: String,
-                              unique:true,
+                              // unique:true,
                               trim: true,
                         },
                         model: {
@@ -473,7 +473,10 @@ const productSchema = new mongoose.Schema({
                         }
                   }
             ]
+      },
+      customSpecifications: {
+            type: []
       }
 })
 
-module.exports = mongoose.model("Product", productSchema)
+module.exports = mongoose.model("Product2", productSchema)
