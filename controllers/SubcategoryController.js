@@ -140,7 +140,7 @@ const search = async (req, res) => {
             .populate(
                   {
                         path: 'category',
-                        select: " -_id name banner"
+                        select: "_id name banner"
                   }
             )
 
