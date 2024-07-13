@@ -151,12 +151,12 @@ const product = async (req, res) => {
             const foundProduct = await ProductModel.findById(id).populate(
                   {
                         path: 'category',
-                        select: " -_id name banner"
+                        select: " _id name banner"
                   }
             ).populate(
                   {
                         path: 'subcategory',
-                        select: " -_id name image"
+                        select: " _id name image"
                   }
             )
 
