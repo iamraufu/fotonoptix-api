@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const create = async (req, res) => {
       try {
             const { name } = req.body
-            const categoryExist = Boolean(await CategoryModel.findOne({ name: name.trim() }))
+            const categoryExist = Boolean(await CategoryModel.findOne({ name: name.trim(), isDeleted: false }))
 
             if (!categoryExist) {
                   const category = await CategoryModel.create(req.body)

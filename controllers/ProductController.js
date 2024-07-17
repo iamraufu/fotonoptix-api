@@ -7,7 +7,7 @@ const mongoose = require("mongoose")
 const create = async (req, res) => {
       try {
             const { name, category, subcategory } = req.body
-            const productExist = Boolean(await ProductModel.findOne({ name }))
+            const productExist = Boolean(await ProductModel.findOne({ name, isDeleted: false }))
 
             if (productExist) {
                   return res.status(409).send({

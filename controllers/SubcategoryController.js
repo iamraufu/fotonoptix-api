@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const create = async (req, res) => {
       try {
             const { name, category } = req.body
-            const subCategoryExist = Boolean(await SubcategoryModel.findOne({ name }))
+            const subCategoryExist = Boolean(await SubcategoryModel.findOne({ name , isDeleted: false}))
             const categoryExist = Boolean(await CategoryModel.findById(category))
 
             if (subCategoryExist) {
