@@ -5,7 +5,6 @@ const applicationSchema = new mongoose.Schema({
             type: String,
             trim: true,
             unique: true,
-            immutable: true,
             required: true
       },
       description: {
