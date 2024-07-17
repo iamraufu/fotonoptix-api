@@ -4,7 +4,6 @@ const categorySchema = new mongoose.Schema({
       name: {
             type: String,
             trim: true,
-            immutable: true,
             required: true
       },
       banner: {
