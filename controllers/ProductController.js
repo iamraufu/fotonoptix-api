@@ -245,9 +245,47 @@ const update = async (req, res) => {
       }
 }
 
+const searchProduct = async (req, res) => {
+      try {
+            const { name } = req.query
+            const products = await ProductModel.find({ name: { $regex: name, $options: 'i' } }
+            ).populate(
+                  {
+                        path: 'category',
+                        select: " -_id name banner"
+                  }
+            ).populate(
+                  {
+                        path: 'subcategory',
+                        select: " -_id name image"
+                  }
+            )
+
+            if (!products.length > 0) {
+                  return res.status(404).json({
+                        status: false,
+                        message: "No products found",
+                        products
+                  })
+            }
+
+            else {
+                  res.status(200).json({
+                        status: true,
+                        message: "Products fetched Successfully",
+                        products
+                  })
+            }
+      }
+      catch (err) {
+
+      }
+}
+
 module.exports = {
       create,
       products,
       product,
-      update
+      update,
+      searchProduct
 }
