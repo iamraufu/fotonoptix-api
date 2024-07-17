@@ -4,7 +4,6 @@ const subcategorySchema = new mongoose.Schema({
       name: {
             type: String,
             trim: true,
-            immutable: true,
             unique: true,
             required: true
       },

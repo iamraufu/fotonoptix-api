@@ -31,6 +31,34 @@ const createBanner = async (req, res) => {
       }
 }
 
+
+const deleteBanner = async (req, res) => {
+      try {
+          const { id } = req.params;
+  
+          const banner = await BannerModel.findById(id);
+  
+          if (!banner) {
+              return res.status(404).send({
+                  status: false,
+                  message: `No banner found with ID ${id}`
+              });
+          }
+  
+          await BannerModel.deleteOne({ _id: id });
+  
+          return res.status(200).send({
+              status: true,
+              message: "Banner deleted successfully!"
+          });
+      } catch (err) {
+          res.status(500).send({
+              status: false,
+              message: `${err}`
+          });
+      }
+  };
+
 const getBanners = async (req, res) => {
       try {
             await search(req, res)
@@ -88,5 +116,6 @@ const search = async (req, res) => {
 
 module.exports = {
       createBanner,
-      getBanners
+      getBanners,
+      deleteBanner 
 }
