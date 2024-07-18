@@ -43,6 +43,9 @@ const productSchema = new mongoose.Schema({
             type: String,
             // required: true
       },
+      specificationImage: {
+            type: String,
+      },
       applications: {
             type: Array,
             of: String,
